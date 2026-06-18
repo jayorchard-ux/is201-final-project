@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penalty Kick Game</title>
+
+
+<style>
+
+    body {
+text-align: center;
+font-family: Arial, sans-serif;
+background: linear-gradient(#1f2937, #111827);
+padding: 40px;
+color: white;
+}
+
+h1 {
+color: white;
+font-size: 48px;
+}
+
+p {
+color: #d1d5db;
+}
+
+button {
+font-size: 20px;
+padding: 12px 24px;
+margin: 10px;
+cursor: pointer;
+border-radius: 8px;
+border: none;
+background-color: #2563eb;
+color: white;
+transition: 0.3s;
+}
+
+button:hover {
+background-color: #1d4ed8;
+}
+
+#scoreboard {
+font-size: 24px;
+margin: 20px;
+color: white;
+font-weight: bold;
+}
+
+#result {
+margin-top: 20px;
+font-size: 28px;
+font-weight: bold;
+color: white;
+}
+
+#field {
+position: relative;
+width: 700px;
+height: 300px;
+margin: 30px auto;
+border: 4px solid #ffffff;
+background: linear-gradient(#4CAF50, #2E7D32);
+overflow: hidden;
+border-radius: 12px;
+box-shadow: 0 10px 25px rgba(0,0,0,.4);
+}
+
+#goal {
+font-size: 280px;
+position: absolute;
+top: -55px;
+left: 165px;
+}
+
+#keeper {
+font-size: 60px;
+position: absolute;
+top: 145px;
+left: 310px;
+transition: all 0.5s ease;
+}
+
+#ball {
+font-size: 45px;
+position: absolute;
+bottom: 15px;
+left: 315px;
+transition: all 0.5s ease;
+}
+
+a {
+color: white;
+font-size: 18px;
+text-decoration: none;
+margin: 0 15px;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+
+</style>
+
+
+</head>
+
+<body>
+
+<div class="game-card">
+
+
+<h1>⚽ Penalty Kick Challenge ⚽</h1>
+
+<p>
+    Test your soccer skills against the goalkeeper.
+    Can you score as many goals as possible?
+</p>
+
+<h2 id="scoreboard">Goals Scored: 0</h2>
+
+<div id="field">
+
+    <div id="goal">🥅</div>
+
+    <div id="keeper">🧤</div>
+
+    <div id="ball">⚽</div>
+
+</div>
+
+<p>Choose where to shoot:</p>
+
+<button onclick="shoot('Left')">Left</button>
+<button onclick="shoot('Center')">Center</button>
+<button onclick="shoot('Right')">Right</button>
+
+<div id="result"></div>
+
+<br><br>
+
+<div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
+    <a href="scratch.html">Barcelona Tiki-Taka Page</a>
+</div>
+
+
+</div>
+
+<script>
+
+    let score = 0;
+
+    function shoot(playerChoice) {
+
+        const options = ["Left", "Center", "Right"];
+
+        const goalieChoice =
+            options[Math.floor(Math.random() * options.length)];
+
+        const ball = document.getElementById("ball");
+        const keeper = document.getElementById("keeper");
+
+        // Reset positions
+
+        ball.style.left = "315px";
+        keeper.style.left = "310px";
+
+        setTimeout(() => {
+
+            // Ball movement
+
+            if (playerChoice === "Left") {
+                ball.style.left = "250px";
+            }
+
+            if (playerChoice === "Center") {
+                ball.style.left = "315px";
+            }
+
+            if (playerChoice === "Right") {
+                ball.style.left = "430px";
+            }
+
+            // Keeper movement
+
+            if (goalieChoice === "Left") {
+                keeper.style.left = "250px";
+            }
+
+            if (goalieChoice === "Center") {
+                keeper.style.left = "310px";
+            }
+
+            if (goalieChoice === "Right") {
+                keeper.style.left = "430px";
+            }
+
+        }, 100);
+
+        let result = "";
+
+        if (playerChoice === goalieChoice) {
+
+            result =
+                "🧤 SAVE! The goalkeeper guessed " +
+                goalieChoice + ".";
+
+        } else {
+
+            score++;
+
+            document.getElementById("scoreboard").innerHTML =
+                "Goals Scored: " + score;
+
+            result =
+                "⚽ GOAL! The goalkeeper guessed " +
+                goalieChoice + ".";
+
+        }
+
+        document.getElementById("result").innerHTML =
+            result;
+    }
+
+</script>
+
+</body>
+</html>
